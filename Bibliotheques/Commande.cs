@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace DataModels
@@ -15,5 +16,10 @@ namespace DataModels
         public Table? table { get; set; }
         public Boolean servie { get; set; }
         public DateTime datecomm { get; set; }
+        [Display(Name = "Articles commandees")]
+        public ICollection<LigneCommande>? Articles { get; set; }
+
+        public int serveurId { get; set; }
+        public Serveur serveur { get; set;}
     }
 }
