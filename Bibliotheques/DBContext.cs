@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,18 @@ using System.Threading.Tasks;
 
 namespace DataModels
 {
-    public class ApplicationDbContext : DbContext
+    public class DBContext : IdentityDbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        { optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ProjetBAR;Trusted_Connection=True;MultipleActiveResultSets=true");
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = ProjetBAR; Trusted_Connection = True; MultipleActiveResultSets = true");
+            }
         }
-
+        public DBContext(DbContextOptions<DBContext> options) : base(options)
+        {
+        }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<Serveur> Serveur { get; set; }

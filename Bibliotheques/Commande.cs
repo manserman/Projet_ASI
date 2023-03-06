@@ -9,8 +9,8 @@ using System.ComponentModel.DataAnnotations;
 namespace DataModels
 {
     public class Commande
-    {
-        int numero { get; set; }
+    {   public int  ID {get; set;}
+       
         public Boolean validee { get; set; }
         public int tableID { get; set; }
         public Table? table { get; set; }
