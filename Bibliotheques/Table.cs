@@ -12,6 +12,8 @@ namespace DataModels
         public int ID { get; set; }
         [Required]
         public Boolean occuppe { get; set; }
+
+
         
     }
 }

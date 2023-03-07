@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Pages\Articles\" />
+    <Folder Include="Pages\Tables\" />
   </ItemGroup>
 
 </Project>
