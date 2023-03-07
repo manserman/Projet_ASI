@@ -12,10 +12,9 @@ namespace DataModels
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = ProjetBAR; Trusted_Connection = True; MultipleActiveResultSets = true");
-            }
+            base.OnConfiguring(optionsBuilder);
+
+           
         }
         public DBContext(DbContextOptions<DBContext> options) : base(options)
         {
