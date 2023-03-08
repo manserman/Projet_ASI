@@ -1,0 +1,24 @@
+﻿@page
+@model Caissier.Pages.Articles.IndexModel
+@{
+    <table class="table">
+<thead>
+<th>Nom Article</th>
+<th>Quantite Disponible</th>
+ <th>Prix Unitaire</th>
+<th>  </th>
+</thead>
+<tbody>
+            @foreach (var article in Model.Articles)
+            {
+                <tr>
+                    <td>@article.nom</td>
+                    <td>@article.quantite</td>
+                   <td><a asp-page="./Edit" asp-route-id="@article.ID">Modifier Article</a></td>
+                </tr>
+            }
+
+</tbody>
+</table>
+    <a asp-page="Create">Ajouter un nouvel Article</a>
+}
