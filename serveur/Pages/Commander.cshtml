@@ -1,0 +1,35 @@
+﻿    @page
+    @model serveur.Pages.CommanderModel
+    @{
+        ViewData["Title"] = "Prise de commande";
+    }
+
+    <h1>Prise de commande</h1>
+
+    <form method="post">
+
+
+        <div class="form-group">
+            <label for="articleIds">Articles:</label>
+            <select class="form-control" id="articleIds" name="articleIds" multiple>
+                @foreach (var article in Model.Articles)
+                {
+                    <option value="@article.ID">@article.nom</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="quantities">Quantities:</label>
+            @foreach (var article in Model.Articles)
+            {
+                <div class="form-inline mb-2">
+                    <label class="mr-2" for="@($"quantities-{article.ID}")">@article.nom:</label>
+                    <input class="form-control mr-2" type="number" id="@($"quantities-{article.ID}")" name="@($"quantities-{article.ID}")" min="1" max="@article.quantite" value="1">
+                    <label for="@($"quantities-{article.ID}")">(@article.quantite available)</label>
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary">Commander</button>
+    </form>
