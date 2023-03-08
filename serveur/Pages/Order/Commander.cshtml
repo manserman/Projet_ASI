@@ -1,0 +1,40 @@
+﻿    @page
+@model serveur.Pages.Order.CommanderModel
+    @{
+        ViewData["Title"] = "Prise de commande";
+    }
+
+    <h1>Prise de commande</h1>
+
+    <form method="post">
+
+
+      
+
+        <div class="form-group">
+            <label for="quantities">Articles</label>
+            <table class="table">
+                <thead>
+                    <th>Article</th>
+                    <th>Quantité à commander</th>
+                    <th>Quantité disponible</th>
+                    <th>Prix Unitaire</th>
+                    <th>Prix </th>
+                </thead>
+                <tbody>
+            @foreach (var article in Model.Articles)
+            {<tr>
+                
+                    <td>@article.nom</td>
+                    <td><input class="form-control mr-2" type="number" asp-for="@Model.quantite" min="0" max="@article.quantite" value="0"></td>
+                    <td>@article.quantite</td>
+                    <td>@article.prixU</td>
+                    <td>@(article.prixU * Model.quantite)</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Commander</button>
+    </form>
