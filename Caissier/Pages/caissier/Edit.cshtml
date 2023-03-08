@@ -1,0 +1,15 @@
+﻿@page
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Arricle";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="caissier.nom">Nom de l'article'</label>
+        <input asp-for="caissier.nom" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

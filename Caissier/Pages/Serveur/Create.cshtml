@@ -1,0 +1,16 @@
+﻿@page
+@model CreateModel
+@{
+    ViewData["Title"] = "Creer un Serveur";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="serveur.nom">Nom du serveur'</label>
+        <input asp-for="serveur.nom" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+ 

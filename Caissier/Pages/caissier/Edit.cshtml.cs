@@ -3,16 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Caissier.Pages.Articles
+namespace Caissier.Pages.caissier
 {
     public class EditModel : PageModel
     {
         [BindProperty]
-        public Article Articles { get; set; }
+        public Caissier.Data.Caissier caissier { get; set; }
         private readonly DBContext _context;
 
-        [BindProperty]
-        public Article Article { get; set; }
         public EditModel(DBContext context)
         {
             _context = context;
@@ -24,7 +22,7 @@ namespace Caissier.Pages.Articles
                 return NotFound();
             }
 
-            Article = await _context.Articles.FirstOrDefaultAsync(m => m.ID == id);
+            caissier = await _context.Caissiers.FirstOrDefaultAsync(m => m.ID == id);
             return Page();
 
         }

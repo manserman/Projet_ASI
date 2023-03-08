@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
-namespace Caissier.Pages.Articles
+namespace Caissier.Pages.Serveur
 {
     public class IndexModel : PageModel
     {
@@ -23,7 +23,8 @@ namespace Caissier.Pages.Articles
             Articles = await _context.Articles.ToListAsync();
 
 
-        }        public async Task<IActionResult> OnPostAsync()
+        }
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {

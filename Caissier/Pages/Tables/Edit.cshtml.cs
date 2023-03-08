@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Caissier.Pages.Articles
+namespace Caissier.Pages.Tables
 {
     public class EditModel : PageModel
     {

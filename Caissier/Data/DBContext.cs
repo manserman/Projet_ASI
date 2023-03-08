@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataModels
+namespace Caissier.Data
 {
     public class DBContext : IdentityDbContext
     {
@@ -26,6 +26,7 @@ namespace DataModels
         public DbSet<LigneCommande> LigneCommandes {get; set;}
 
         public DbSet<Facture> Factures { get; set; }
+        public DbSet<Caissier> Caissiers { get; set; }
 
     }
 }

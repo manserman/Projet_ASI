@@ -1,15 +1,16 @@
 using Caissier.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Diagnostics;
 
-namespace Caissier.Pages.Articles
+namespace Caissier.Pages.Serveur
 {
     public class CreateModel : PageModel
     {
         private readonly DBContext _context;
 
         [BindProperty]
-        public Article Article { get; set; }
+        public Caissier.Data.Serveur serveur{ get; set; }
         public CreateModel(DBContext context)
         {
             _context = context;
@@ -26,7 +27,7 @@ namespace Caissier.Pages.Articles
                 return Page();
             }
 
-            _context.Articles.Add(Article);
+            _context.Serveur.Add(serveur);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

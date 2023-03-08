@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    <table class="table">
+<thead>
+<th>Nom Article</th>
+<th>Quantite Disponible</th>
+ <th>Prix Unitaire</th>
+<th>  </th>
+</thead>
+<tbody>
+            @foreach (var article in Model.caissiers)
+            {
+               
+            }
+
+</tbody>
+</table>
+    <a asp-page="Create">Ajouter un nouvel Article</a>
+}

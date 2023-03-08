@@ -5,12 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace DataModels
+namespace Caissier.Data
 {
-    public class Serveur
+    public class Article
     {
         public int ID { get; set; }
-        public string nom { get; set; }   
-        
+      
+        public  string nom { get; set; }
+       public int prixU { get; set; }
+       
+
+        public int quantite { get; set; }
     }
 }

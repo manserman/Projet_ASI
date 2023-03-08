@@ -4,33 +4,33 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
-namespace Caissier.Pages.Articles
+namespace Caissier.Pages.caissier
 {
     public class IndexModel : PageModel
     {
         [BindProperty]
-        public IList<Article> Articles { get; set; }
+        public IList<Caissier.Data.Caissier> caissiers { get; set; }
+        public Caissier.Data.Caissier Caissier { get; set; }
         private readonly DBContext _context;
 
-        [BindProperty]
-        public Article Article { get; set; }
         public IndexModel(DBContext context)
         {
             _context = context;
         }
         public async Task OnGetAsync()
         {
-            Articles = await _context.Articles.ToListAsync();
+            caissiers = await _context.Caissiers.ToListAsync();
 
 
-        }        public async Task<IActionResult> OnPostAsync()
+        }
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Article).State = EntityState.Modified;
+            _context.Attach(caissiers).State = EntityState.Modified;
 
             try
             {
@@ -38,7 +38,7 @@ namespace Caissier.Pages.Articles
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ArticleExists(Article.ID))
+                if (!ArticleExists(Caissier.ID))
                 {
                     return NotFound();
                 }
@@ -52,7 +52,7 @@ namespace Caissier.Pages.Articles
         }
         private bool ArticleExists(int id)
         {
-            return _context.Articles.Any(e => e.ID == id);
+            return _context.Caissiers.Any(e => e.ID == id);
         }
     }
 

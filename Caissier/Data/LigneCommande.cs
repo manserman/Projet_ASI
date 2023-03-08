@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataModels
+namespace Caissier.Data
 {
     public class LigneCommande
     {

@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
-namespace Caissier.Pages.Articles
+namespace Caissier.Pages.Factures
 {
     public class IndexModel : PageModel
     {
         [BindProperty]
-        public IList<Article> Articles { get; set; }
+        public IList<Facture> Factures{ get; set; }
         private readonly DBContext _context;
 
         [BindProperty]
@@ -20,10 +20,12 @@ namespace Caissier.Pages.Articles
         }
         public async Task OnGetAsync()
         {
-            Articles = await _context.Articles.ToListAsync();
+            Factures = await _context.Factures.ToListAsync();
+            
 
 
-        }        public async Task<IActionResult> OnPostAsync()
+        }
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {

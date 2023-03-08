@@ -2,7 +2,7 @@ using Caissier.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Caissier.Pages.Articles
+namespace Caissier.Pages.Tables
 {
     public class CreateModel : PageModel
     {
