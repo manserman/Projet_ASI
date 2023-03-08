@@ -1,9 +1,10 @@
-using Caissier.Data;
+using ProjetASI.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ProjetASI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Caissier.Pages.Articles
+namespace ProjetASI.Pages.Articles
 {
     public class EditModel : PageModel
     {

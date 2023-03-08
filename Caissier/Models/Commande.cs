@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Caissier.Data
+namespace ProjetASI.Models
 {
     public class Commande
     {   public int  ID {get; set;}

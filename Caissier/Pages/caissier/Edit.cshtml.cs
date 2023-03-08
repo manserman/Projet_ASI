@@ -1,14 +1,15 @@
-using Caissier.Data;
+using ProjetASI.Data;
+using ProjetASI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Caissier.Pages.caissier
+namespace ProjetASI.Pages.caissier
 {
     public class EditModel : PageModel
     {
         [BindProperty]
-        public Caissier.Data.Caissier caissier { get; set; }
+        public ProjetASI.Models.Caissier caissier { get; set; }
         private readonly DBContext _context;
 
         public EditModel(DBContext context)

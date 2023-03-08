@@ -1,10 +1,11 @@
-using Caissier.Data;
+using ProjetASI.Data;
+using ProjetASI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
-namespace Caissier.Pages.Tables
+namespace ProjetASI.Pages.Tables
 {
     public class IndexModel : PageModel
     {

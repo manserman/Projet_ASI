@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ProjetASI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Caissier.Data
+namespace ProjetASI.Data
 {
     public class DBContext : IdentityDbContext
     {
@@ -26,7 +27,7 @@ namespace Caissier.Data
         public DbSet<LigneCommande> LigneCommandes {get; set;}
 
         public DbSet<Facture> Factures { get; set; }
-        public DbSet<Caissier> Caissiers { get; set; }
+        public DbSet<ProjetASI.Models.Caissier> Caissiers { get; set; }
 
     }
 }

@@ -1,16 +1,17 @@
-using Caissier.Data;
+using ProjetASI.Data;
+using ProjetASI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
-namespace Caissier.Pages.caissier
+namespace ProjetASI.Pages.caissier
 {
     public class IndexModel : PageModel
     {
         [BindProperty]
-        public IList<Caissier.Data.Caissier> caissiers { get; set; }
-        public Caissier.Data.Caissier Caissier { get; set; }
+        public IList<ProjetASI.Models.Caissier> caissiers { get; set; }
+        public ProjetASI.Models.Caissier Caissier { get; set; }
         private readonly DBContext _context;
 
         public IndexModel(DBContext context)

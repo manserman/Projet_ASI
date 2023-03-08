@@ -1,10 +1,11 @@
-﻿using Caissier.Data;
+﻿using ProjetASI.Data;
+using ProjetASI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace serveur.Pages.Order
+namespace ProjetASI.Pages.Order
 {
     public class CommanderModel : PageModel
     {

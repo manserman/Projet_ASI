@@ -1,16 +1,17 @@
-using Caissier.Data;
+using ProjetASI.Data;
+using ProjetASI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 
-namespace Caissier.Pages.Serveur
+namespace ProjetASI.Pages.Serveur
 {
     public class CreateModel : PageModel
     {
         private readonly DBContext _context;
 
         [BindProperty]
-        public Caissier.Data.Serveur serveur{ get; set; }
+        public ProjetASI.Models.Serveur serveur{ get; set; }
         public CreateModel(DBContext context)
         {
             _context = context;

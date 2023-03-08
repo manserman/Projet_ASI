@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Caissier.Data
+namespace ProjetASI.Models
 {
     public class Table
     {

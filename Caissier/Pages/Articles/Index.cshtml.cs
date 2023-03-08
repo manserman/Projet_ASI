@@ -1,10 +1,13 @@
-using Caissier.Data;
+using ProjetASI.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+using ProjetASI.Models;
 
-namespace Caissier.Pages.Articles
+
+using Microsoft.VisualBasic;
+using Microsoft.EntityFrameworkCore;
+
+namespace ProjetASI.Pages.Articles
 {
     public class IndexModel : PageModel
     {
