@@ -1,0 +1,50 @@
+﻿@page
+@model ProjetASI.Pages.caissier.EncaissementModel
+@{
+}
+
+@{
+    ViewData["Title"] = "Encaissement";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Commande N° 315</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Payer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex">
+    <h1>Encaissement</h1>
+</div>
+<br />
+
+
+<div class="card" style="width: 18rem;">
+    <img src="https://img.freepik.com/photos-premium/abstrait-arriere-plan-flou-cafe-rue-dans-ville-aucun-peuple-vide-quarantaine-restaurant-ete_548821-6524.jpg?w=2000" class="card-img-top" alt="...">
+
+    <h5 class="card-header">
+        Les commandes à encaisser
+    </h5>
+ 
+    <div class="list-group">
+
+        <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#exampleModal">Commande N° 315 </a>
+        <a href="#" class="list-group-item list-group-item-action">Commande N° 15 </a>
+        <a href="#" class="list-group-item list-group-item-action">Commande N° 38 </a>
+
+    </div>
+</div>
