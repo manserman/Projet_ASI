@@ -20,5 +20,18 @@
 <div class="d-flex flex-row">
     @foreach (var commande in commandes)
     {
+        <div class="card mb-3" style="width: 18rem;">
+            <h5 class="card-header">
+                Table N° @commande.Numero
+            </h5>
+            <div class="card-body">
+                
+                <p class="card-text">@commande.Description</p>
+            </div>
+
+            <div class="p-2 ms-auto">
+                <a href="#" class="btn btn-primary">Valider</a>
+            </div>
+        </div>
     }
 </div>
