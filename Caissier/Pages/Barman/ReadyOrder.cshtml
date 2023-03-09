@@ -11,13 +11,13 @@
 
 @{
     var commandes = new List<dynamic>() {
-        new { Numero = 1, Table = 2, Description = "Poulet braisé sur son nid des caviars accompagné des allocos à la grenouille" },
-        new { Numero = 2, Table = 4, Description = "Steak frites avec sauce béarnaise" },
-        new { Numero = 3, Table = 6, Description = "Poisson grillé avec riz safrané et légumes de saison" }
+        new { Numero = 1, Table = 2, Commande = 315, Description = "Poulet braisé sur son nid des caviars accompagné des allocos à la grenouille" },
+        new { Numero = 2, Table = 4, Commande = 12, Description = "Steak frites avec sauce béarnaise" },
+        new { Numero = 3, Table = 6, Commande = 38, Description = "Poisson grillé avec riz safrané et légumes de saison" }
     };
 }
 
-<div class="d-flex flex-row">
+<div class="d-flex flex-row s">
     @foreach (var commande in commandes)
     {
         <div class="card mb-3" style="width: 18rem;">
@@ -25,13 +25,19 @@
                 Table N° @commande.Numero
             </h5>
             <div class="card-body">
-                
+                <h6 class="card-title">Commande N° @commande.Commande</h6>
                 <p class="card-text">@commande.Description</p>
             </div>
 
             <div class="p-2 ms-auto">
                 <a href="#" class="btn btn-primary">Valider</a>
             </div>
+
+            <div class="card-footer">
+                <h6>Etat de la commande :</h6>
+            </div>
         </div>
+
+        
     }
 </div>

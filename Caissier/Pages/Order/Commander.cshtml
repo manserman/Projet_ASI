@@ -1,40 +1,55 @@
 ﻿@page
 @model ProjetASI.Pages.Order.CommanderModel
-    @{
-        ViewData["Title"] = "Prise de commande";
-    }
+@{
+    ViewData["Title"] = "Prise de commande";
+}
 
-    <h1>Prise de commande</h1>
+<h1>Prise de commande</h1>
 
-    <form method="post">
-
-
-      
-
-        <div class="form-group">
-            
-            <table class="table">
-                <thead>
-                    <th>Article</th>
-                    <th>Quantité à commander</th>
-                    <th>Quantité disponible</th>
-                    <th>Prix Unitaire</th>
-                    <th>Prix </th>
-                </thead>
-                <tbody>
-            @foreach (var article in Model.Articles)
-            {<tr>
-                
-                    <td>@article.nom</td>
-                    <td><input class="form-control mr-2" type="number" asp-for="@Model.quantite" min="0" max="@article.quantite" value="0"></td>
-                    <td>@article.quantite</td>
-                    <td>@article.prixU</td>
-                    <td>@(article.prixU * Model.quantite)</td>
-                </tr>
-            }
+<form method="post">
+    <div class="form-group">
+        <table class="table">
+            <thead>
+            <th>Article</th>
+            <th>Quantité à commander</th>
+            <th>Quantité disponible</th>
+            <th>Prix Unitaire</th>
+            <th>Prix</th>
+            </thead>
+            <tbody>
+                @foreach (var article in Model.Articles)
+                {
+                    <tr>
+                        <td>@article.nom</td>
+                        <td><input class="form-control mr-2" type="number" asp-for="@Model.quantite" min="0" max="@article.quantite" value="0" oninput="updateTotalPrice(this, @article.prixU)"></td>
+                        <td>@article.quantite</td>
+                        <td>@article.prixU</td>
+                        <td class="total-price-cell">@article.prixU</td>
+                    </tr>
+                }
             </tbody>
         </table>
-        </div>
-    
-        <button type="submit" class="btn btn-primary">Commander</button>
-    </form>
+        <div>Total: <span id="total-price"></span></div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Commander</button>
+</form>
+
+<script>
+    function updateTotalPrice(inputElement, prixU) {
+        var quantite = inputElement.value;
+        var totalPrice = quantite * prixU;
+        var totalPriceCell = inputElement.parentElement.nextElementSibling.nextElementSibling.nextElementSibling;
+        totalPriceCell.textContent = totalPrice;
+        updateGrandTotal();
+    }
+
+    function updateGrandTotal() {
+        var totalPrices = document.querySelectorAll('.total-price-cell');
+        var grandTotal = 0;
+        for (var i = 0; i < totalPrices.length; i++) {
+            grandTotal += parseFloat(totalPrices[i].textContent);
+        }
+        document.getElementById('total-price').textContent = grandTotal.toFixed(2);
+    }
+</script>
