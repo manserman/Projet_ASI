@@ -6,6 +6,20 @@
 
 <h1>Prise de commande</h1>
 
+<div class="container p-2 justify-content-end">
+    <div class="dropdown d-flex justify-content-end">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            TABLES
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">123</a></li>
+            <li><a class="dropdown-item" href="#">49</a></li>
+            <li><a class="dropdown-item" href="#">7</a></li>
+        </ul>
+    </div>
+    <div class="d-flex justify-content-end" id="selectedOption"></div>
+</div>
+
 <form method="post">
     <div class="form-group">
         <table class="table">
@@ -17,6 +31,7 @@
             <th>Prix</th>
             </thead>
             <tbody>
+
                 @foreach (var article in Model.Articles)
                 {
                     <tr>
@@ -24,15 +39,21 @@
                         <td><input class="form-control mr-2" type="number" asp-for="@Model.quantite" min="0" max="@article.quantite" value="0" oninput="updateTotalPrice(this, @article.prixU)"></td>
                         <td>@article.quantite</td>
                         <td>@article.prixU</td>
-                        <td class="total-price-cell">@article.prixU</td>
+                        <td class="total-price-cell">0 </td>
                     </tr>
                 }
+
             </tbody>
         </table>
-        <div>Total: <span id="total-price"></span></div>
-    </div>
 
-    <button type="submit" class="btn btn-primary">Commander</button>
+        <div class="card-footer">
+            Total: <span id="total-price"></span>
+        </div>
+    </div><br />
+
+    <div>
+        <button type="submit" class="btn btn-primary">Commander</button>
+    </div>
 </form>
 
 <script>
@@ -52,4 +73,24 @@
         }
         document.getElementById('total-price').textContent = grandTotal.toFixed(2);
     }
+
+
+    // Récupérez tous les éléments du menu déroulant
+		const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+		// Parcourez tous les éléments du menu déroulant et ajoutez un événement 'click'
+		dropdownItems.forEach(item => {
+		  item.addEventListener('click', (event) => {
+		    // Empêchez la page de se recharger lorsqu'un élément est cliqué
+		    event.preventDefault();
+
+		    // Récupérez le texte de l'élément sélectionné
+		    const selectedOptionText = item.textContent.trim();
+
+		    // Mettez à jour le contenu du conteneur avec le texte de l'élément sélectionné
+		    const selectedOption = document.getElementById('selectedOption');
+		    selectedOption.textContent = "Table sélectionnée N°: " + selectedOptionText;
+		  });
+		});
+
 </script>

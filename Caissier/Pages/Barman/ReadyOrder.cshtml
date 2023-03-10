@@ -17,15 +17,14 @@
     };
 }
 
-<div class="d-flex flex-row s">
+<div class="d-flex flex-rows">
     @foreach (var commande in commandes)
     {
         <div class="card mb-3" style="width: 18rem;">
             <h5 class="card-header">
-                Table N° @commande.Numero
+                Commande N° @commande.Commande
             </h5>
             <div class="card-body">
-                <h6 class="card-title">Commande N° @commande.Commande</h6>
                 <p class="card-text">@commande.Description</p>
             </div>
 
