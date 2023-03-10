@@ -1,60 +1,32 @@
-using ProjetASI.Data;
-using ProjetASI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+using ProjetASI.Data;
+using ProjetASI.Models;
 
 namespace ProjetASI.Pages.caissier
 {
     public class IndexModel : PageModel
     {
-        [BindProperty]
-        public IList<ProjetASI.Models.Caissier> caissiers { get; set; }
-        public ProjetASI.Models.Caissier Caissier { get; set; }
-        private readonly DBContext _context;
+        private readonly ProjetASI.Data.DBContext _context;
 
-        public IndexModel(DBContext context)
+        public IndexModel(ProjetASI.Data.DBContext context)
         {
             _context = context;
         }
+
+        public IList<Caissier> Caissier { get;set; } = default!;
+
         public async Task OnGetAsync()
         {
-            caissiers = await _context.Caissiers.ToListAsync();
-
-
-        }
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
+            if (_context.Caissiers != null)
             {
-                return Page();
+                Caissier = await _context.Caissiers.ToListAsync();
             }
-
-            _context.Attach(caissiers).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ArticleExists(Caissier.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-        private bool ArticleExists(int id)
-        {
-            return _context.Caissiers.Any(e => e.ID == id);
         }
     }
-
 }

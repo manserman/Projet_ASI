@@ -3,18 +3,16 @@
 @{
     <table class="table">
 <thead>
-<th>Nom Article</th>
-<th>Quantite Disponible</th>
- <th>Prix Unitaire</th>
-<th>  </th>
+<th>Numéro Table</th>
+
 </thead>
 <tbody>
-            @foreach (var article in Model.Articles)
+            @foreach (var article in Model.Tables)
             {
                 <tr>
-                    <td>@article.nom</td>
-                    <td>@article.quantite</td>
-                   <td><a asp-page="./Edit" asp-route-id="@article.ID">Modifier Article</a></td>
+                    <td>@article.ID</td>
+                    
+                   
                 </tr>
             }
 

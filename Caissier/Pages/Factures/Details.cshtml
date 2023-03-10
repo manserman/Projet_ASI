@@ -1,0 +1,45 @@
+﻿@page
+@model ProjetASI.Pages.Factures.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Facture</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+          <Label>Date: </Label>  @Html.DisplayNameFor(model => model.Facture.commande.datecomm)
+        </dt>
+        <dd class="col-sm-10">
+          <label>Commande</label>  @Html.DisplayFor(model => model.Facture.commande.ID)
+        </dd>
+         <label>Articles:</label>
+          <table class="table">
+            <thead>
+            <th>Nom Article</th>
+            <th>Quantite Commandee</th>
+            <th> Sous total</th>
+            <th>  </th>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Facture.commande.Articles)
+                {
+                    <tr>
+                        <td>@item.article.nom</td>
+                        <td>@item.quantite</td>
+                        <td>@item.prix</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+            </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Facture?.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

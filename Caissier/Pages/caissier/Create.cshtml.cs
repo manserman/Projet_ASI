@@ -1,41 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjetASI.Data;
 using ProjetASI.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace ProjetASI.Pages.caissier
 {
     public class CreateModel : PageModel
     {
-        private readonly DBContext _context;
+        private readonly ProjetASI.Data.DBContext _context;
 
-        [BindProperty]
-        public ProjetASI.Models.Caissier caissier { get; set; }
-        public CreateModel(DBContext context)
+        public CreateModel(ProjetASI.Data.DBContext context)
         {
             _context = context;
         }
+
         public IActionResult OnGet()
         {
             return Page();
         }
 
+        [BindProperty]
+        public Caissier Caissier { get; set; }
+        
+
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+          if (!ModelState.IsValid)
             {
                 return Page();
             }
-            if (caissier != null)
-            {
-                _context.Caissiers.Add(caissier);
-            }
-                await _context.SaveChangesAsync();
 
-                return RedirectToPage("./Index");
-            
+            _context.Caissiers.Add(Caissier);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
         }
     }
 }

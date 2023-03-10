@@ -1,24 +1,36 @@
 ﻿@page
-@model projetASI.Pages.Serveur.IndexModel
-@{
-    <table class="table">
-<thead>
-<th>Nom Article</th>
-<th>Quantite Disponible</th>
- <th>Prix Unitaire</th>
-<th>  </th>
-</thead>
-<tbody>
-            @foreach (var article in Model.Articles)
-            {
-                <tr>
-                    <td>@article.nom</td>
-                    <td>@article.quantite</td>
-                   <td><a asp-page="./Edit" asp-route-id="@article.ID">Modifier Article</a></td>
-                </tr>
-            }
+@model ProjetASI.Pages.serveur.IndexModel
 
-</tbody>
-</table>
-    <a asp-page="Create">Ajouter un nouvel Article</a>
+@{
+    ViewData["Title"] = "Index";
 }
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Serveur[0].nom)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Serveur) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

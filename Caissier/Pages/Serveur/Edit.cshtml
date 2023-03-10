@@ -1,23 +1,35 @@
 ﻿@page
-@model ProjetASI.Pages.Serveur.EditModel
+@model ProjetASI.Pages.serveur.EditModel
+
 @{
-    ViewData["Title"] = "Edit Arricle";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1>Edit</h1>
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Article.nom">Nom de l'article'</label>
-        <input asp-for="Article.nom" class="form-control" />
+<h4>Serveur</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Serveur.ID" />
+            <div class="form-group">
+                <label asp-for="Serveur.nom" class="control-label"></label>
+                <input asp-for="Serveur.nom" class="form-control" />
+                <span asp-validation-for="Serveur.nom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Article.prixU">Prix Unitaire</label>
-        <input asp-for="Article.prixU" class="form-control" value="@Model.Article.prixU"> </input>
-    </div>
-    <div class="form-group">
-        <label asp-for="Article.quantite"></label>
-        <input asp-for="Article.quantite" type="int" class="form-control" value="@Model.Article.quantite"></input>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

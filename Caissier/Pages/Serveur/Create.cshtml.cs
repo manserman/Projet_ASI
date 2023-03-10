@@ -1,34 +1,42 @@
-using ProjetASI.Data;
-using ProjetASI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using ProjetASI.Data;
+using ProjetASI.Models;
 
-namespace ProjetASI.Pages.Serveur
+namespace ProjetASI.Pages.serveur
 {
     public class CreateModel : PageModel
     {
-        private readonly DBContext _context;
+        private readonly ProjetASI.Data.DBContext _context;
 
-        [BindProperty]
-        public ProjetASI.Models.Serveur serveur{ get; set; }
-        public CreateModel(DBContext context)
+        public CreateModel(ProjetASI.Data.DBContext context)
         {
             _context = context;
         }
+
         public IActionResult OnGet()
         {
             return Page();
         }
 
+        [BindProperty]
+        public Serveur Serveur { get; set; }
+        
+
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+          if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Serveur.Add(serveur);
+            _context.Serveur.Add(Serveur);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

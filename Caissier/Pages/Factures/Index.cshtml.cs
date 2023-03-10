@@ -1,62 +1,33 @@
-using ProjetASI.Data;
-using ProjetASI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+using ProjetASI.Data;
+using ProjetASI.Models;
 
-namespace Projet.Pages.Factures
+namespace ProjetASI.Pages.Factures
 {
     public class IndexModel : PageModel
     {
-        [BindProperty]
-        public IList<Facture> Factures{ get; set; }
-        private readonly DBContext _context;
+        private readonly ProjetASI.Data.DBContext _context;
 
-        [BindProperty]
-        public Article Article { get; set; }
-        public IndexModel(DBContext context)
+        public IndexModel(ProjetASI.Data.DBContext context)
         {
             _context = context;
         }
+
+        public IList<Facture> Facture { get;set; } = default!;
+
         public async Task OnGetAsync()
         {
-            Factures = await _context.Factures.ToListAsync();
-            
-
-
-        }
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
+            if (_context.Factures != null)
             {
-                return Page();
+                Facture = await _context.Factures
+                .Include(f => f.commande).ToListAsync();
             }
-
-            _context.Attach(Article).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ArticleExists(Article.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-        private bool ArticleExists(int id)
-        {
-            return _context.Articles.Any(e => e.ID == id);
         }
     }
-
 }

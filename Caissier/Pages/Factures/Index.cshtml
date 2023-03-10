@@ -1,17 +1,36 @@
 ﻿@page
-@model Projet.Pages.Factures.IndexModel
-@{
-    <table class="table">
-<thead>
-<th>Nom Article</th>
-<th>Quantite Disponible</th>
- <th>Prix Unitaire</th>
-<th>  </th>
-</thead>
-<tbody>
-        
+@model ProjetASI.Pages.Factures.IndexModel
 
-</tbody>
-</table>
-    <a asp-page="Create">Ajouter un nouvel Article</a>
+@{
+    ViewData["Title"] = "Index";
 }
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Facture[0].commande)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Facture) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.commande.ID)
+            </td>
+            <td>
+            
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

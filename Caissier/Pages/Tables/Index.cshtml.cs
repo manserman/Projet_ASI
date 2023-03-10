@@ -10,18 +10,18 @@ namespace ProjetASI.Pages.Tables
     public class IndexModel : PageModel
     {
         [BindProperty]
-        public IList<Article> Articles { get; set; }
+        public IList<Table> Tables { get; set; }
         private readonly DBContext _context;
 
         [BindProperty]
-        public Article Article { get; set; }
+        public Table Table { get; set; }
         public IndexModel(DBContext context)
         {
             _context = context;
         }
         public async Task OnGetAsync()
         {
-            Articles = await _context.Articles.ToListAsync();
+            Tables = await _context.Tables.ToListAsync();
 
 
         }
@@ -32,7 +32,7 @@ namespace ProjetASI.Pages.Tables
                 return Page();
             }
 
-            _context.Attach(Article).State = EntityState.Modified;
+            _context.Attach(Tables).State = EntityState.Modified;
 
             try
             {
@@ -40,7 +40,7 @@ namespace ProjetASI.Pages.Tables
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ArticleExists(Article.ID))
+                if (!ArticleExists(Table.ID))
                 {
                     return NotFound();
                 }
@@ -54,7 +54,7 @@ namespace ProjetASI.Pages.Tables
         }
         private bool ArticleExists(int id)
         {
-            return _context.Articles.Any(e => e.ID == id);
+            return _context.Tables.Any(e => e.ID == id);
         }
     }
 
