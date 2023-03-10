@@ -16,49 +16,67 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="container mt-5">
-					<div class="row justify-content-center">
-						<div class="col-8">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title text-center mb-4">Restaurant XYZ</h5>
-									<p class="card-text">Table : 5</p>
-									<hr>
-									<div class="row mb-3">
-										<div class="col-8">
-											<p class="fw-bold">Plat 1</p>
-										</div>
-										<div class="col-4 text-end">
-											<p>10,00 €</p>
-										</div>
-									</div>
-									<div class="row mb-3">
-										<div class="col-8">
-											<p class="fw-bold">Plat 2</p>
-										</div>
-										<div class="col-4 text-end">
-											<p>12,50 €</p>
-										</div>
-									</div>
-									<hr>
-									<div class="row mb-3">
-										<div class="col-8">
-											<p class="fw-bold">Total</p>
-										</div>
-										<div class="col-4 text-end">
-											<p>22,50 €</p>
-										</div>
-									</div>
-									<hr>
-									<p class="card-text text-center">Merci de votre visite !</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                <h6>Détails de la commande</h6>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Plat</th>
+                          <th scope="col">Prix unitaire</th>
+                          <th scope="col">Quantité</th>
+                          <th scope="col">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Pizza Margherita</td>
+                          <td>10€</td>
+                          <td>2</td>
+                          <td>20€</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Salade César</td>
+                          <td>7€</td>
+                          <td>1</td>
+                          <td>7€</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Coca-cola</td>
+                          <td>2€</td>
+                          <td>3</td>
+                          <td>6€</td>
+                        </tr>
+                      </tbody>
+                                
+                    </table>
+                    <hr>
+                    <div class="form-group">
+                        <label for="installments">Paiement en :</label>
+                        <select class="form-control" id="installments" name="installments">
+                            <option value="1">1 fois</option>
+                            <option value="2">2 fois</option>
+                            <option value="3">3 fois</option>
+                            <option value="4">4 fois</option>
+                        </select>
+                    </div>
+
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-8">
+                            <p class="fw-bold">Total</p>
+                        </div>
+                        <div class="col-4 text-end">
+                            <p>22,50 €</p>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <p class="card-text text-center">Merci de votre visite !</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success">Payer</button>
             </div>
         </div>
@@ -86,5 +104,4 @@
 
     </div>
 
-
-</>
+<div/>
