@@ -17,7 +17,7 @@ namespace ProjetASI.Models
 
         public Commande commande{ get;set; }
         public int quantite { get; set; }
-        public int prix { get; set; }
+        public double prix { get; set; }
 
     }
 }

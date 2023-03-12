@@ -1,22 +1,44 @@
 ﻿@page
 @model ProjetASI.Pages.Tables.IndexModel
 @{
+    <form method="post">
     <table class="table">
-<thead>
-<th>Numéro Table</th>
-
-</thead>
-<tbody>
-            @foreach (var article in Model.Tables)
-            {
-                <tr>
-                    <td>@article.ID</td>
-                    
-                   
+        <thead>
+        <tr><th>Numéro Table</th>
+        <th>Etat</th>
+        <th>Action</th>
+        <th></th>
                 </tr>
+        </thead>
+        <tbody>
+                    @foreach (var Table in Model.Tables)
+            {
+                        <tr>
+                        <td> @Table.ID </td>
+                            @if (Table.occuppe)
+                    {
+                        <td>Occuppée</td>
+                            <td>
+                                <input type="submit" class="btn btn-outline-success" asp-page-handler="premier" value="Libérer" asp-route-id="@Table.ID" input /></td>
+                               <td> <input type="submit" class="btn btn-outline-danger" asp-page-handler="delete" value="Supprimer" asp-route-id="@Table.ID" input />
+                            </td>
+
+                        
+                    }
+                            else{
+                        <td>Libre</td>
+                            <td>
+                                <input type="submit" class="btn btn-outline-warning" asp-page-handler="premier" value="Occuper" asp-route-id="@Table.ID" input /></td>
+                               <td> <input type="submit" class="btn btn-outline-danger" asp-page-handler="delete" value="Supprimer" asp-route-id="@Table.ID" input />
+                        </td>
+                            }
+                       </tr>
+
+                       
             }
 
-</tbody>
-</table>
-    <a asp-page="Create">Ajouter un nouvel Article</a>
+        </tbody>
+    </table>
+        <input type="submit" class="btn btn-primary" asp-page-handler="creation" value="Créer une nouvelle Table" input/>
+    </form>
 }

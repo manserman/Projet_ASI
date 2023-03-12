@@ -12,7 +12,7 @@ namespace ProjetASI.Models
         public int ID { get; set; }
 
         public string nom { get; set; }
-        public int prixU { get; set; }
+        public double prixU { get; set; }
 
 
         public int quantite { get; set; }

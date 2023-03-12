@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetASI.Migrations
 {
-    public partial class unautre : Migration
+    public partial class uneautre : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -95,7 +95,8 @@ namespace ProjetASI.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    occuppe = table.Column<bool>(type: "bit", nullable: false)
+                    occuppe = table.Column<bool>(type: "bit", nullable: false),
+                    commandePrise = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

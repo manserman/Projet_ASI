@@ -11,18 +11,18 @@ namespace ProjetASI.Models
     public class Commande
     {   public int  ID {get; set;}
        
-        public Boolean validee { get; set; }
+        public Boolean? validee { get; set; }
         public int tableID { get; set; }
         public Table? table { get; set; }
-        public Boolean servie { get; set; }
+        
         public DateTime datecomm { get; set; }
         [Display(Name = "Articles commandees")]
         public ICollection<LigneCommande>? Articles { get; set; }
-
+        public Boolean? isServed { get; set; }
         public int serveurId { get; set; }
         public Serveur serveur { get; set;}
-        public Boolean commencer { get; set; }
+        public Boolean ?commencer { get; set; }
 
-        public int prix { get; set; }
+        public double prix { get; set; }
     }
 }

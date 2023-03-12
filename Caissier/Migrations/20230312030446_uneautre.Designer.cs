@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetASI.Data;
 
@@ -11,9 +12,10 @@ using ProjetASI.Data;
 namespace ProjetASI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20230312030446_uneautre")]
+    partial class uneautre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,8 +238,8 @@ namespace ProjetASI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("prixU")
-                        .HasColumnType("float");
+                    b.Property<int>("prixU")
+                        .HasColumnType("int");
 
                     b.Property<int>("quantite")
                         .HasColumnType("int");
@@ -272,25 +274,25 @@ namespace ProjetASI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<bool?>("commencer")
+                    b.Property<bool>("commencer")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("datecomm")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("isServed")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("prix")
-                        .HasColumnType("float");
+                    b.Property<int>("prix")
+                        .HasColumnType("int");
 
                     b.Property<int>("serveurId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("servie")
+                        .HasColumnType("bit");
+
                     b.Property<int>("tableID")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("validee")
+                    b.Property<bool>("validee")
                         .HasColumnType("bit");
 
                     b.HasKey("ID");
@@ -334,8 +336,8 @@ namespace ProjetASI.Migrations
                     b.Property<int>("CommandeID")
                         .HasColumnType("int");
 
-                    b.Property<double>("prix")
-                        .HasColumnType("float");
+                    b.Property<int>("prix")
+                        .HasColumnType("int");
 
                     b.Property<int>("quantite")
                         .HasColumnType("int");

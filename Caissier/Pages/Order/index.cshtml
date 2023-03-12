@@ -1,0 +1,80 @@
+﻿@page
+@model ProjetASI.Pages.Order.CommanderModel
+@{
+    ViewData["Title"] = "Prise de commande";
+}
+
+<h1>Prise de commande</h1>
+<form method="post">
+<div class="container p-2 justify-content-end">
+    <div class="class=" form-group"">
+
+        <label asp-for="commande.tableID" class="control-label"> Table</label>
+        <select asp-for="commande.tableID" asp-items="@ViewBag.Tables"></select>
+    </div>
+  
+</div>
+
+
+    <div class="form-group">
+        <table class="table">
+            <thead>
+            <tr><th>Article</th>
+            <th>Quantité à commander</th>
+            <th>Quantité disponible</th>
+            <th>Prix Unitaire</th>
+            <th>Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+              
+                @foreach (var article in Model.Articles)
+                {
+                    
+                    <tr>
+                        <td>@article.nom</td>
+                        <td><input class="form-control mr-2" type="number" name="quantitesCommandees" min="0" max="@article.quantite" value="0" oninput="updateTotalPrice(this, @article.prixU)"></td>
+                        <td >@article.quantite</td>
+                        <td>@article.prixU</td>
+                        <td class="total-price-cell" >0.0 </td>
+                    </tr>
+                   
+                }
+
+            </tbody>
+        </table>
+
+        <div class="card-footer">
+            Total: <span id="total-price" ></span>
+            <input type="hidden" asp-for="commande.prix" id="prixtotal" />
+        </div>
+    </div><br />
+
+    <div>
+        <button type="submit" class="btn btn-primary" asp-page-handler="first">Commander</button>
+    </div>
+</form>
+
+<script>
+    function updateTotalPrice(inputElement, prixU) {
+        var quantite = inputElement.value;
+        var totalPrice = quantite * prixU;
+        var totalPriceCell = inputElement.parentElement.nextElementSibling.nextElementSibling.nextElementSibling;
+        totalPriceCell.textContent = totalPrice;
+        updateGrandTotal();
+    }
+
+    function updateGrandTotal() {
+        var totalPrices = document.querySelectorAll('.total-price-cell');
+        var grandTotal = 0.0;
+        for (var i = 0; i < totalPrices.length; i++) {
+            grandTotal += parseFloat(totalPrices[i].textContent);
+        }
+        document.getElementById('total-price').textContent = grandTotal;
+        document.getElementById('prixtotal').value = grandTotal;
+    }
+
+
+ 
+
+</script>
