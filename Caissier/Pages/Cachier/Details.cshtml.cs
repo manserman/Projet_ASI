@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using ProjetASI.Data;
 using ProjetASI.Models;
 
-namespace ProjetASI.Pages.Factures
+namespace ProjetASI.Pages.Cachier
 {
     public class DetailsModel : PageModel
     {
-        private readonly ProjetASI.Data.DBContext _context;
+        private readonly DBContext _context;
 
-        public DetailsModel(ProjetASI.Data.DBContext context)
+        public DetailsModel(DBContext context)
         {
             _context = context;
         }
 
-      public Facture Facture { get; set; }
+        public Facture Facture { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,7 +33,7 @@ namespace ProjetASI.Pages.Factures
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Facture = facture;
             }

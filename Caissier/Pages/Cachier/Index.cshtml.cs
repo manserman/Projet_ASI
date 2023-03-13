@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using ProjetASI.Data;
 using ProjetASI.Models;
 
-namespace ProjetASI.Pages.Factures
+namespace ProjetASI.Pages.Cachier
 {
     public class IndexModel : PageModel
     {
-        private readonly ProjetASI.Data.DBContext _context;
+        private readonly DBContext _context;
 
-        public IndexModel(ProjetASI.Data.DBContext context)
+        public IndexModel(DBContext context)
         {
             _context = context;
         }
 
-        public IList<Facture> Facture { get;set; } = default!;
+        public IList<Facture> Facture { get; set; } = default!;
 
         public async Task OnGetAsync()
         {

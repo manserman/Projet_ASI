@@ -7,8 +7,10 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.SignalR;
+using ProjetASI.Hubs;
 
-namespace ProjetASI.Pages.Order
+namespace ProjetASI.Pages.Waiter.Order
 {
     public class CommanderModel : PageModel
     {
@@ -19,7 +21,7 @@ namespace ProjetASI.Pages.Order
         [BindProperty]
         public IList<Article> Articles { get; set; }
         private readonly DBContext _context;
-       
+        private IHubContext<CommandeHub> hubContext;
         [BindProperty]
         public IList<Table> TablesOccupeessanscommandes { get; set; }
         [BindProperty]
@@ -28,9 +30,10 @@ namespace ProjetASI.Pages.Order
         public int prixt { get;  set; }
         [BindProperty]
         public  Commande commande { get; set; }
-        public CommanderModel(DBContext context)
-        {
-            _context = context;
+        public CommanderModel(DBContext context, IHubContext<CommandeHub> hubcontext)
+{
+                  _context = context;
+                 this.hubContext = hubcontext;
         }
         public async Task<IActionResult> OnGetAsync()
         {
@@ -51,7 +54,8 @@ namespace ProjetASI.Pages.Order
                 
                 commande.datecomm = DateTime.Now;
                 commande.serveurId = 2;
-                Console.WriteLine(commande.tableID);
+                commande.validee = false;
+                commande.commencer = false;
                 Articles = await _context.Articles.ToListAsync();
                 _context.Commandes.Add(commande);
                 await _context.SaveChangesAsync();
@@ -70,17 +74,17 @@ namespace ProjetASI.Pages.Order
                         Articles[i].quantite-=qte;
                         _context.Attach(Articles[i]).State = EntityState.Modified;
                     }
-
+                    
                 }
                 Table table= _context.Tables.FirstOrDefault(t => t.ID == commande.tableID);
                 table.commandePrise = true;
                 _context.Attach(table).State = EntityState.Modified;
                 
                  await _context.SaveChangesAsync();
-
-
+                commande = await _context.Commandes.Include(c => c.Articles).FirstOrDefaultAsync(cde => cde.ID == commande.ID);
+                await hubContext.Clients.All.SendAsync("RecevoirCommande", "Nouvelle Commande");
             }
-            return RedirectToPage("./Index");
+            return RedirectToPage("./order");
 
         }
     }
