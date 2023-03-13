@@ -61,8 +61,7 @@ namespace ProjetASI.Pages.Tables
         {
             Table = await _context.Tables.FirstOrDefaultAsync(me => me.ID == id);
             Table.occuppe = !Table.occuppe;
-            if (!Table.occuppe)
-                Table.commandePrise = false;
+           
             _context.Attach(Table).State = EntityState.Modified;
             try
             {

@@ -13,8 +13,7 @@ namespace ProjetASI.Models
         [Required]
         public Boolean occuppe { get; set; }
 
-        public Boolean commandePrise { get; set; } 
-
+      
         
     }
 }

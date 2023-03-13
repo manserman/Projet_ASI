@@ -29,5 +29,38 @@ namespace ProjetASI.Pages.Articles
             return Page();
 
         }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            _context.Attach(Article).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ArticleExists(Article.ID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToPage("./Index");
+        }
+        private bool ArticleExists(int id)
+        {
+            return _context.Articles.Any(e => e.ID == id);
+        }
     }
+
 }
+

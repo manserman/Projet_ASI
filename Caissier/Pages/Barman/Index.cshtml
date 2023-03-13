@@ -8,53 +8,62 @@
     <h1>Commandes</h1>
 </div>
 <br />
-
-
-<div class="d-flex flex-rows">
+<form class="form-group" method="post">
+<div id="div-commandes" class="row">
     @foreach (var commande in @Model.commandes)
     {
-        <div class="card mb-3" style="width: 18rem;">
+        <div class="col-md-4" style="width: 18rem;">
             <h5 class="card-header">
                 Commande N° @commande.ID
             </h5>
             <div class="card-body">
                 <table class="table">
-                  <thead>
+                    <thead>
                         <tr>
-                         <th>Article</th>
-                        <th>Quantité</th>    
+                            <th>Article</th>
+                            <th>Quantité</th>
                         </tr>
-                  </thead>
-                @foreach(var Article in commande.Articles)
-                {<tr>
-                    <td>@Article.article.nom</td> 
-                    <td>@Article.quantite</td>
+                    </thead>
+                    @foreach (var Article in commande.Articles)
+                    {
+                        <tr>
+                            <td>@Article.article.nom</td>
+                            <td>@Article.quantite</td>
                         </tr>
-                }
+                    }
                 </table>
             </div>
 
             <div class="p-2 ms-auto">
-                <a href="#" class="btn btn-primary">Valider</a>
+                @if ((bool)@commande.commencer)
+                {
+                    <input type="submit" class="btn btn-primary" value="Valider" asp-route-id="@commande.ID" />
+                }
+                else
+                {
+                    <input type="submit" class="btn btn-primary"  value="Commencer la preparation" asp-route-id="@commande.ID" />
+                }
             </div>
 
-            <div class="card-footer">
-                <h6>Etat de la commande :</h6>
-            </div>
         </div>
-
-        
     }
 </div>
+</form>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 <script>
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("/commandeHub")
         .build();
 
-    connection.on("RecevoirCommandesEtArticles", (commande) => {
-        // Afficher les commandes et les articles sur la page
-        window.location.href = "/Barman";
+    connection.start().then(function () {
+        console.log("La connexion à SignalR est établie!");
+    }).catch(function (err) {
+        console.error(err.toString());
+    });
+    connection.on("RecevoirCommande", function() {
+        location.reload();
     });
 
-    connection.start();
+
 </script>

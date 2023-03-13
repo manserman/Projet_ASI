@@ -30,5 +30,16 @@ namespace ProjetASI.Pages.Barman
             commandes = await _context.Commandes.Include(c => c.Articles).ThenInclude(art=> art.article).Where(ce => ce.validee == false).ToListAsync();
             return Page();
         }
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            Commande cmde = await _context.Commandes.FirstOrDefaultAsync(cd => cd.ID == id);
+            if ((bool)!cmde.commencer)
+                cmde.commencer = true;
+            else
+                cmde.validee = true;
+            _context.Attach(cmde).State=EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("./Index");
+        }
     }
 }
