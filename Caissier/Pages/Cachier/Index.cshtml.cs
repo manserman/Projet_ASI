@@ -13,20 +13,24 @@ namespace ProjetASI.Pages.Cachier
     public class IndexModel : PageModel
     {
         private readonly DBContext _context;
-
+        [BindProperty]
+        public IList<Commande> commandes { get; set; }
         public IndexModel(DBContext context)
         {
             _context = context;
         }
 
-        public IList<Facture> Facture { get; set; } = default!;
+        
 
         public async Task OnGetAsync()
         {
             if (_context.Factures != null)
             {
-                Facture = await _context.Factures
-                .Include(f => f.commande).ToListAsync();
+                commandes = await _context.Commandes.
+                    Include(ce => ce.serveur).
+                    Include(ce => ce.table)
+                    .Include(ce => ce.Articles)
+                .ThenInclude(art => art.article).Where(cde => cde.isServed== true && (cde.isPaid==false || cde.isPaid==null)).ToListAsync();
             }
         }
     }

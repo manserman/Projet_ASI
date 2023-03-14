@@ -22,7 +22,7 @@ namespace ProjetASI.Models
         public int serveurId { get; set; }
         public Serveur serveur { get; set;}
         public Boolean ?commencer { get; set; }
-
+        public Boolean? isPaid { get; set; }
         public double prix { get; set; }
     }
 }

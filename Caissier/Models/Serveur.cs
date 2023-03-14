@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace ProjetASI.Models
 {
     public class Serveur
@@ -14,5 +15,8 @@ namespace ProjetASI.Models
 
         public ICollection<Commande>? Commandes { get; set; }
 
+        public string UserID { get; set; } 
+
+       
     }
 }

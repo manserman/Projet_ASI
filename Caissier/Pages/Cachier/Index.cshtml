@@ -7,30 +7,39 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
+
 </p>
+<form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Facture[0].commande)
+                Numéro de commande
             </th>
-            <th></th>
+            <th>
+                Numéro de la table
+            </th>
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Facture) {
+@foreach (var commande in Model.commandes) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.commande.ID)
+                @Html.DisplayFor(modelItem => commande.ID)
             </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => commande.tableID)
+                    </td>
             <td>
-            
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+
+                        <button type="submit" class="btn btn-primary">Payer</button>
                
             </td>
         </tr>
 }
     </tbody>
 </table>
+</form>

@@ -9,6 +9,7 @@
     using System.Collections.Generic;
     using Microsoft.AspNetCore.SignalR;
     using ProjetASI.Hubs;
+    using System.Security.Claims;
 
     namespace ProjetASI.Pages.Waiter.Order
     {
@@ -28,6 +29,8 @@
             public Article Article { get; set; }
             [BindProperty]
             public int prixt { get;  set; }
+        public Serveur serv { get; set; }
+        private IList<Serveur> serveurs;
             [BindProperty]
             public  Commande commande { get; set; }
             public CommanderModel(DBContext context, IHubContext<CommandeHub> hubcontext)
@@ -36,7 +39,7 @@
             _hubContext= hubcontext;
             }
             public async Task<IActionResult> OnGetAsync()
-            {
+            {  
                 Articles = await _context.Articles.ToListAsync();
                 TablesOccupeessanscommandes = _context.Tables.Where(t => t.occuppe == false).ToList();
 
@@ -49,11 +52,15 @@
             }
             public async Task<IActionResult> OnPostFirstAsync()
             {
-                if(quantitesCommandees!=null)
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
+            serveurs = await _context.Serveur.Where(se => se.UserID == userId).ToListAsync();
+            serv = serveurs.FirstOrDefault();
+            if (quantitesCommandees!=null)
                 { 
                 
                     commande.datecomm = DateTime.Now;
-                    commande.serveurId = 2;
+                    commande.serveurId = serv.ID;
                     commande.validee = false;
                     commande.commencer = false;
                     commande.isServed = false;
