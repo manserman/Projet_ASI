@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProjetASI.Models;
 using System;
@@ -15,7 +16,7 @@ namespace ProjetASI.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-           
+
         }
         public DBContext(DbContextOptions<DBContext> options) : base(options)
         {
@@ -24,7 +25,7 @@ namespace ProjetASI.Data
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<Serveur> Serveur { get; set; }
         public DbSet<Table> Tables { get; set; }
-        public DbSet<LigneCommande> LigneCommandes {get; set;}
+        public DbSet<LigneCommande> LigneCommandes { get; set; }
 
         public DbSet<Facture> Factures { get; set; }
         public DbSet<ProjetASI.Models.Caissier> Caissiers { get; set; }
