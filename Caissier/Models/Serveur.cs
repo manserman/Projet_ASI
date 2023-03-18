@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace ProjetASI.Models
@@ -15,8 +16,12 @@ namespace ProjetASI.Models
 
         public ICollection<Commande>? Commandes { get; set; }
 
-        public string? UserID { get; set; } 
+        public string UserID { get; set; }
+        public IdentityUser User { get; set; }
 
-       
+        public Serveur(string nom, string UserID) {
+            this.nom = nom;
+            this.UserID = UserID;
+        }
     }
 }

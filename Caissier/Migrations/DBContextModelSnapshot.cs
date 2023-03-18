@@ -244,7 +244,7 @@ namespace ProjetASI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
                 });
 
             modelBuilder.Entity("ProjetASI.Models.Caissier", b =>
@@ -261,7 +261,7 @@ namespace ProjetASI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Caissiers");
+                    b.ToTable("Caissiers", (string)null);
                 });
 
             modelBuilder.Entity("ProjetASI.Models.Commande", b =>
@@ -299,7 +299,7 @@ namespace ProjetASI.Migrations
 
                     b.HasIndex("tableID");
 
-                    b.ToTable("Commandes");
+                    b.ToTable("Commandes", (string)null);
                 });
 
             modelBuilder.Entity("ProjetASI.Models.Facture", b =>
@@ -317,7 +317,7 @@ namespace ProjetASI.Migrations
 
                     b.HasIndex("CommandeID");
 
-                    b.ToTable("Factures");
+                    b.ToTable("Factures", (string)null);
                 });
 
             modelBuilder.Entity("ProjetASI.Models.LigneCommande", b =>
@@ -346,7 +346,7 @@ namespace ProjetASI.Migrations
 
                     b.HasIndex("CommandeID");
 
-                    b.ToTable("LigneCommandes");
+                    b.ToTable("LigneCommandes", (string)null);
                 });
 
             modelBuilder.Entity("ProjetASI.Models.Serveur", b =>
@@ -363,7 +363,7 @@ namespace ProjetASI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Serveur");
+                    b.ToTable("Serveur", (string)null);
                 });
 
             modelBuilder.Entity("ProjetASI.Models.Table", b =>
@@ -382,7 +382,7 @@ namespace ProjetASI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Tables");
+                    b.ToTable("Tables", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
