@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Gestion Paiements</h1>
 
 
 </p>
@@ -35,7 +35,7 @@
                     </td>
             <td>
 
-                        <button type="submit" class="btn btn-primary">Payer</button>
+                        <a  asp-page="Encaisser" class="btn btn-primary" asp-route-id="@commande.ID">Payer</a>
                
             </td>
         </tr>
@@ -43,3 +43,24 @@
     </tbody>
 </table>
 </form>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/commandeHub")
+        .build();
+
+    connection.start().then(function () {
+        console.log("La connexion à SignalR est établie!");
+    }).catch(function (err) {
+        console.error(err.toString());
+    });
+    connection.on("CommandeServie", function () {
+        location.reload();
+    });
+
+
+</script>
+
+
+

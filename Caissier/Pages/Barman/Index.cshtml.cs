@@ -19,11 +19,11 @@ namespace ProjetASI.Pages.Barman
         [BindProperty]
         public IList<Commande> commandes { get; set; }
         private readonly DBContext _context;
-        private IHubContext<CommandeHub> hubContext;
+        private readonly IHubContext<CommandeHub> _hubContext;
         public IndexModel(DBContext context, IHubContext<CommandeHub> hubcontext)
         {
             _context = context;
-            this.hubContext = hubcontext;
+            _hubContext = hubcontext;
         }
         public async Task<IActionResult> OnGetAsync()
         {
@@ -39,6 +39,7 @@ namespace ProjetASI.Pages.Barman
                 cmde.validee = true;
             _context.Attach(cmde).State=EntityState.Modified;
             await _context.SaveChangesAsync();
+            await _hubContext.Clients.All.SendAsync("CommandePrete",1);
             return RedirectToAction("./Index");
         }
     }

@@ -1,4 +1,120 @@
 ﻿@page
 @model ProjetASI.Pages.Waiter.IndexModel
 @{
+    ViewData["Title"] = "Details";
 }
+
+     <form method="post">
+    <p>
+        <a asp-page="order">Prendre une vouvelle commande</a>
+    </p>
+         <br/>
+     <h1>Mes commandes</h1>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Numéro de commande
+                </th>
+                <th>
+                    Numéro de la table
+                </th>
+                <th>
+                    Etat de la commande
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var commande in Model.commandes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => commande.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => commande.tableID)
+                    </td>
+                    @if (commande.validee == true)
+                    {
+                        <td>Commande prête à être servie</td>
+                        <td> <input type="submit" class="btn btn-outline-success" asp-page-handler="servie" value="Servir" asp-route-id="@commande.ID" input /></td>
+                    }
+                    else
+                    {
+                        <td>Commande En cours de préparation</td>
+
+
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <table class="table">
+        <thead>
+        <tr><th>Numéro Table</th>
+        <th>Etat</th>
+        <th>Action</th>
+        
+                </tr>
+        </thead>
+        <tbody>
+                    @foreach (var Table in Model.tables)
+            {
+                        <tr>
+                        <td> @Table.ID </td>
+                            @if (Table.occuppe)
+                    {
+                        <td>Occuppée</td>
+                            <td>
+                                <input type="submit" class="btn btn-outline-success" asp-page-handler="premier" value="Libérer" asp-route-id="@Table.ID" input /></td>
+                              
+                            
+
+                        
+                    }
+                            else{
+                        <td>Libre</td>
+                            <td>
+
+                                </td>
+
+                            }
+                       </tr>
+
+                       
+            }
+
+        </tbody>
+    </table>
+    
+
+
+    </form>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/commandeHub")
+        .build();
+
+    connection.start().then(function () {
+        console.log("La connexion à SignalR est établie!");
+    }).catch(function (err) {
+        console.error(err.toString());
+    });
+    connection.on("CommandePrete", function (id) {
+        if (id==1) {
+            location.reload();
+        }
+    });
+
+
+</script>
+

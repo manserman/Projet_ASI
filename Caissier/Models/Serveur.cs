@@ -15,7 +15,7 @@ namespace ProjetASI.Models
 
         public ICollection<Commande>? Commandes { get; set; }
 
-        public string UserID { get; set; } 
+        public string? UserID { get; set; } 
 
        
     }

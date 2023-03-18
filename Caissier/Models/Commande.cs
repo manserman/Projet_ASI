@@ -13,7 +13,7 @@ namespace ProjetASI.Models
        
         public Boolean? validee { get; set; }
         public int tableID { get; set; }
-        public Table? table { get; set; }
+        public Table table { get; set; }
         
         public DateTime datecomm { get; set; }
         [Display(Name = "Articles commandees")]

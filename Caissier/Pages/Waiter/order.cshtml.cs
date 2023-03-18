@@ -23,16 +23,15 @@
             public IList<Article> Articles { get; set; }
             private readonly DBContext _context;
             private readonly IHubContext<CommandeHub> _hubContext;
-        [BindProperty]
+             [BindProperty]
             public IList<Table> TablesOccupeessanscommandes { get; set; }
             [BindProperty]
             public Article Article { get; set; }
             [BindProperty]
             public int prixt { get;  set; }
-        public Serveur serv { get; set; }
-        private IList<Serveur> serveurs;
-            [BindProperty]
-            public  Commande commande { get; set; }
+     
+        [BindProperty]
+        public  Commande commande { get; set; }
             public CommanderModel(DBContext context, IHubContext<CommandeHub> hubcontext)
     {
                       _context = context;
@@ -54,16 +53,15 @@
             {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             
-            serveurs = await _context.Serveur.Where(se => se.UserID == userId).ToListAsync();
-            serv = serveurs.FirstOrDefault();
+            
             if (quantitesCommandees!=null)
                 { 
-                
                     commande.datecomm = DateTime.Now;
-                    commande.serveurId = serv.ID;
+                    commande.serveurId =1;
                     commande.validee = false;
                     commande.commencer = false;
                     commande.isServed = false;
+                Console.WriteLine(commande.tableID);
                     Articles = await _context.Articles.ToListAsync();
                     _context.Commandes.Add(commande);
                     await _context.SaveChangesAsync();
@@ -71,13 +69,13 @@
                 Console.WriteLine("###### La commande a pour ID"+id);
                 for (int i=0; i< quantitesCommandees.Length; i++)
                     {
-                        int qte;
+                        int qte=0;
                         int.TryParse(quantitesCommandees[i],out qte);
                         if (qte>0)
                         {
                             LigneCommande A = new LigneCommande();
                             A.ArticleID=Articles[i].ID;
-                        A.CommandeID = id;
+                            A.CommandeID = id;
                             A.quantite=qte;
                             A.prix = Articles[i].prixU * qte;
                             _context.LigneCommandes.Add(A);

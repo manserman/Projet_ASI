@@ -7,7 +7,7 @@
 <div>
     <h5>Encaisser la commande @Model.commande.ID</h5>
 </div>
-<form class="form-group">
+<form class="form-group" method="post">
     <label> Somme à encaisser</label>
     <input type="number" id="somme" value="0" min="0" max="@Model.commande.prix" />
     <button class="btn-primary" onclick="">  Payer</button>

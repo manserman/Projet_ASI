@@ -22,16 +22,15 @@ namespace ProjetASI.Pages.Cachier
 
         
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (_context.Factures != null)
-            {
+         
                 commandes = await _context.Commandes.
                     Include(ce => ce.serveur).
                     Include(ce => ce.table)
                     .Include(ce => ce.Articles)
                 .ThenInclude(art => art.article).Where(cde => cde.isServed== true && (cde.isPaid==false || cde.isPaid==null)).ToListAsync();
-            }
+            return Page();
         }
     }
 }

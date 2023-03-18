@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using ProjetASI.Data;
 using ProjetASI.Models;
 
@@ -11,10 +12,16 @@ namespace ProjetASI.Pages.Cachier
         public Commande commande { get; set; }
         [BindProperty]
         public int sommedejapayee { get; set; } = 0;
+        
         private readonly DBContext _context;
-        public void OnGet(int id)
+        public EncaisserModel(DBContext context)
         {
-            commande = _context.Commandes.FirstOrDefault(cde => cde.ID == id);
+            _context = context;
+        }
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            commande =await _context.Commandes.FirstOrDefaultAsync(cde => cde.ID == id);
+            return Page();
         }
     }
 }

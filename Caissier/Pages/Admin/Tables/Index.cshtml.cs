@@ -57,24 +57,6 @@ namespace ProjetASI.Pages.Tables
             return _context.Tables.Any(e => e.ID == id);
         }
 
-        public async Task<IActionResult> OnPostPremierAsync(int id)
-        {
-            Table = await _context.Tables.FirstOrDefaultAsync(me => me.ID == id);
-            Table.occuppe = !Table.occuppe;
-           
-            _context.Attach(Table).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-
-            }
-           
-            return RedirectToPage("./Index");
-
-        }
         public async Task<IActionResult> OnPostCreationAsync(int id)
         {
             Table = new Table();
