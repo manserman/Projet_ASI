@@ -6,9 +6,12 @@ using ProjetASI.Models;
 
 using Microsoft.VisualBasic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ProjetASI.Pages.Articles
 {
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         [BindProperty]

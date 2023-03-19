@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjetASI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ProjetASI.Pages.Articles
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         [BindProperty]

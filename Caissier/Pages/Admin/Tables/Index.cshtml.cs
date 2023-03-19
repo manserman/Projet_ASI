@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ProjetASI.Pages.Tables
 {
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         [BindProperty]

@@ -24,7 +24,7 @@ using ProjetASI.Models;
 
 namespace ProjetASI.Areas.Identity.Pages.Account
 {
-    [Authorize(Roles = "Administrateur")]
+    [Authorize(Roles = "Admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -89,7 +89,8 @@ namespace ProjetASI.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
-
+            [Display(Name = "Nom")]
+            public string Name { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -129,15 +130,15 @@ namespace ProjetASI.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    //Try here
-                    var defaultRole = _roleManager.FindByNameAsync("Serveur").Result;
+                   
+                   var defaultRole = _roleManager.FindByNameAsync("Serveur").Result;
                     if (defaultRole != null)
                     {
                         
-                        IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultRole.Name);
-                        Serveur new_serveur = new Serveur(user.UserName, user.Id);
+                       IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultRole.Name);
+                        Serveur new_serveur = new Serveur(Input.Name, user.Id);
                         _context.Serveur.Add(new_serveur);
-                        await _context.SaveChangesAsync();
+                       await _context.SaveChangesAsync();
                         return RedirectToPage("Register");
                     }
                     
