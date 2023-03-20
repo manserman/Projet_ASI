@@ -80,6 +80,7 @@ using System.Data;
                     commande.validee = false;
                     commande.commencer = false;
                     commande.isServed = false;
+                    commande.isPaid = false;
                     Console.WriteLine(commande.tableID);
                     Articles = await _context.Articles.ToListAsync();
                     _context.Commandes.Add(commande);
