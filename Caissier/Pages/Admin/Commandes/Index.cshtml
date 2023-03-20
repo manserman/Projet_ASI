@@ -1,0 +1,71 @@
+﻿@page
+@model ProjetASI.Pages.Admin.Commandes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Commande[0].table)
+            </th>
+            <th>
+                Date 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Commande[0].serveur)
+            </th>
+           
+            <th>
+                Etat de Paiement
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Commande[0].prix)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Commande) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.table.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datecomm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.serveur.nom)
+            </td>
+           
+            
+                @if(item.isPaid==true)
+                {
+                    <td>
+                        Payé</td>
+                }
+                else
+                {
+                   <td> En attente de paiement</td>
+                }
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.prix)
+            </td>
+            <td>
+               
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> 
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

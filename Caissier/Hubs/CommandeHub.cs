@@ -23,5 +23,10 @@ namespace ProjetASI.Hubs
 
             await Clients.All.SendAsync("CommandeServie");
         }
+        public async Task CommandePayee()
+        {
+
+            await Clients.All.SendAsync("CommandePayee");
+        }
     }
 }

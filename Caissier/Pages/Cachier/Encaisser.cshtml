@@ -7,45 +7,42 @@
 <div>
     <h5>Encaisser la commande @Model.commande.ID</h5>
 </div>
-<form class="form-group" method="post">
+<form class="form-group" method="post" id="form">
     <label> Somme à encaisser</label>
     <input type="number" id="somme" value="0" min="0" max="@Model.commande.prix" />
-    <button class="btn-primary" onclick="">  Payer</button>
+    <button class="btn-primary" id="payer" onclick="calcul(event) ">Payer</button>
     <br /><br /><br />
     <label>Restant à payer: </label>
     <span id="restant">
-        @if (Model.commande.prix - Model.sommedejapayee > 0)
-        {
-            @(Model.commande.prix-Model.sommedejapayee)
-        }
-        else
-        {
-            <p>Paiement complet</p>
-        }
     </span>
     <br /><br />
-
-    <input type="submit" class="btn-primary" value="Valider l'encaissement" />
+    <button type="submit" id="paiement"  class="btn btn-primary" asp-route-id="@Model.commande.ID"> Valider le paiement</button>
+    <button type="submit" id="paiement" class="btn btn-primary" asp-route-id="@Model.commande.ID" asp-page-handler="facture"> Générer une facture</button>
 </form>
 
 <script>
     let sommeInput = document.getElementById("somme");
     let restantSpan = document.getElementById("restant");
     let payerButton = document.getElementById("payer");
-    let restant = @Model.commande.prix - @Model.sommedejapayee;
-
-    if (restant <= 0) {
-        restantSpan.textContent = "Paiement complet";
-        payerButton.disabled = true;
+    let paiement = document.getElementById("paiement");
+    paiement.disabled = true ;
+    let restant = @Model.commande.prix;
+    restantSpan.textContent = restant;
+    function calcul(event) {
+        event.preventDefault();
+        let somme = parseFloat(sommeInput.value);
+        restant = restant - somme;
+        restantSpan.textContent = restant;
+        sommeInput.value = 0;
+        if (restant == 0 ) {
+       
+            paiement.disabled = false ;
+            payerButton.disabled = true;
+          
+        }
+       
     }
 
-    sommeInput.addEventListener("input", () => {
-        let somme = parseFloat(sommeInput.value);
-        if (somme >= restant) {
-            sommeInput.value = restant.toFixed(2);
-            payerButton.disabled = false;
-        } else {
-            payerButton.disabled = true;
-        }
-    });
+
+    
 </script>

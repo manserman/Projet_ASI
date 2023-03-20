@@ -110,10 +110,18 @@
         console.error(err.toString());
     });
     connection.on("CommandePrete", function (id) {
-        if (id==1) {
+       
+        if (id==@Model.user.ID) {
             location.reload();
         }
     });
+    connection.on("CommandePayee", function () {
+
+       
+            location.reload();
+        
+    });
+   
 
 
 </script>

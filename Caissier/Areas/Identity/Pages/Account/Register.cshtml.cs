@@ -136,7 +136,9 @@ namespace ProjetASI.Areas.Identity.Pages.Account
                     {
                         
                        IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultRole.Name);
-                        Serveur new_serveur = new Serveur(Input.Name, user.Id);
+                        Serveur new_serveur = new Serveur();
+                        new_serveur.nom=Input.Name;
+                        new_serveur.UserID = user.Id;
                         _context.Serveur.Add(new_serveur);
                        await _context.SaveChangesAsync();
                         return RedirectToPage("Register");

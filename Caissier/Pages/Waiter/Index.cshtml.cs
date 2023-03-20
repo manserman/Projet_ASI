@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.SignalR;
@@ -5,28 +6,47 @@ using Microsoft.EntityFrameworkCore;
 using ProjetASI.Data;
 using ProjetASI.Hubs;
 using ProjetASI.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ProjetASI.Pages.Waiter
 {
+    [Authorize(Roles = "Serveur")]
     public class IndexModel : PageModel
     {
+        [BindProperty]
+        public Serveur user { get; set; }
         private readonly DBContext _context;
         private readonly IHubContext<CommandeHub> _hubContext;
         [BindProperty]
         public IList<Commande> commandes { get; set; }
         [BindProperty]
         public IList<Table> tables { get; set; }
-        
-        public IndexModel(DBContext context, IHubContext<CommandeHub> hubcontext)
+        private readonly UserManager<IdentityUser> _userManager;
+        public IndexModel(DBContext context, IHubContext<CommandeHub> hubcontext, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _hubContext = hubcontext;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            commandes = await _context.Commandes.Where(cde => cde.serveurId == 1 && cde.isServed==false).ToListAsync();
-            tables = _context.Tables.ToList();
+
+
+
+            // Vérifier que l'utilisateur est authentifié
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                // Obtenir l'ID de l'utilisateur actuel
+                IdentityUser current = await _userManager.GetUserAsync(HttpContext.User);
+                user = _context.Serveur.FirstOrDefault(usr => usr.UserID == current.Id);
+
+
+                commandes = _context.Commandes.Where(cde => cde.serveurId == user.ID && cde.isServed == false).ToList();
+                tables = _context.Tables.ToList();
+            }
             return Page();
 
         }

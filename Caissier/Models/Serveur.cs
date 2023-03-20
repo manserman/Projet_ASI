@@ -16,12 +16,9 @@ namespace ProjetASI.Models
 
         public ICollection<Commande>? Commandes { get; set; }
 
-        public string UserID { get; set; }
-        public IdentityUser User { get; set; }
+        public string? UserID{ get; set; }
+        public IdentityUser? User { get; set; }
 
-        public Serveur(string nom, string UserID) {
-            this.nom = nom;
-            this.UserID = UserID;
-        }
+       
     }
 }

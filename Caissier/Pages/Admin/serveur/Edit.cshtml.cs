@@ -33,7 +33,7 @@ namespace ProjetASI.Pages.serveur
                 return NotFound();
             }
 
-            var serveur =  await _context.Serveur.FirstOrDefaultAsync(m => m.ID == id);
+            var serveur =  await _context.Serveur.Where(serv =>serv.UserID!=null).FirstOrDefaultAsync(m => m.ID == id);
             if (serveur == null)
             {
                 return NotFound();
