@@ -28,7 +28,7 @@ namespace ProjetASI.Pages.serveur
         {
             if (_context.Serveur != null)
             {
-                Serveur = await _context.Serveur.ToListAsync();
+                Serveur = await _context.Serveur.Where(serv => serv.UserID!=null).ToListAsync();
             }
         }
     }

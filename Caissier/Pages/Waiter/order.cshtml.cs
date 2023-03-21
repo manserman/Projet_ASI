@@ -114,7 +114,7 @@ using System.Data;
                     await _hubContext.Clients.All.SendAsync("RecevoirCommande");
                 }
             }
-                return RedirectToPage("./order");
+                return RedirectToPage("./Index");
 
             }
         }

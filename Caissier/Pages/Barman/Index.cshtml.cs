@@ -39,7 +39,7 @@ namespace ProjetASI.Pages.Barman
                 cmde.validee = true;
             _context.Attach(cmde).State=EntityState.Modified;
             await _context.SaveChangesAsync();
-            await _hubContext.Clients.All.SendAsync("CommandePrete",1);
+            await _hubContext.Clients.All.SendAsync("CommandePrete", cmde.serveurId);
             return RedirectToAction("./Index");
         }
     }

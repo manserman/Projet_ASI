@@ -26,8 +26,6 @@ namespace ProjetASI.Data
         public DbSet<Serveur> Serveur { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<LigneCommande> LigneCommandes { get; set; }
-
-        public DbSet<Facture> Factures { get; set; }
         public DbSet<ProjetASI.Models.Caissier> Caissiers { get; set; }
 
     }

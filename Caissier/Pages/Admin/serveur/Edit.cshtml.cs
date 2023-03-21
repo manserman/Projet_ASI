@@ -24,7 +24,7 @@ namespace ProjetASI.Pages.serveur
         }
 
         [BindProperty]
-        public Serveur Serveur { get; set; } = default!;
+        public Serveur Serveur { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
