@@ -9,14 +9,14 @@
 </div>
 <br />
 <form class="form-group" method="post">
-    <div id="div-commandes" class="row" class="card-body overflow-auto" style="height:200px">
+    <div id="div-commandes" class="row" class="card-body" style="height:200px">
     @foreach (var commande in @Model.commandes)
     {
         <div class="col-md-4" style="width: 18rem;">
             <h5 class="card-header">
                 Commande N° @commande.ID
             </h5>
-            <div class="card-body">
+                <div class="card-body overflow-auto" style="height:180px">
                 <table class="table">
                     <thead>
                         <tr>
@@ -37,7 +37,7 @@
             <div class="p-2 ms-auto">
                 @if ((bool)@commande.commencer)
                 {
-                    <input type="submit" class="btn btn-primary" value="Valider" asp-route-id="@commande.ID" />
+                        <input type="submit" class=" btn btn-success" value="Valider" asp-route-id="@commande.ID" />
                 }
                 else
                 {
@@ -48,7 +48,12 @@
         </div>
     }
 </div>
+
 </form>
+<br />
+<br />
+<br />
+<br />
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 <script>
